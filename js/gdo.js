@@ -1,5 +1,4 @@
 var refreshPage;
-var refreshDelay;
 
 $(document).ready(function(){
 	gdoUpdateProgression();
@@ -19,8 +18,7 @@ $(document).ready(function(){
 })
 
 function getSoonFinished(){
-	var finishIn = $('#startIn').val();
-	console.log(finishIn)
+	var finishIn = $('#finishIn').val();
 	$.getJSON('getSoonFinished',
 	{a:finishIn}).done(function(data){
 		console.log(data);
@@ -30,7 +28,6 @@ function getSoonFinished(){
 
 function getSoonStarted(){
 	var startIn = $('#startIn').val();
-	console.log(startIn)
 	$.getJSON('getSoonStarted',
 	{a:startIn}).done(function(data){
 		console.log(data);
@@ -38,6 +35,11 @@ function getSoonStarted(){
 	})
 }
 
+function autoRefresh(){
+	$.getJSON('refresh', function(data){
+		$('.response').html(fillTemplate(data));		
+	})
+}
 
 // '2017-07-02 17:15:00'
 function isRefreshRequired(){
@@ -56,22 +58,11 @@ function isRefreshRequired(){
 	})	 
 }
 
-function getNewBlock(item){
-	// refreshDelay = setTimeout(autoRefresh, 1000);
-	// autoRefresh();
-}
+function getNewBlock(){
 
-function autoRefresh(){
-	
-	$.getJSON('refresh', function(data){
-		$('.response').html(fillTemplate(data));
-		$('.programme-block-container').fadeIn('slow');
-		
-	})
 }
 
 function fillTemplate(data){
-	clearTimeout(refreshDelay);
 	clearInterval(refreshPage);
 	var source   = $("#programme-block-template").html();
 	var template = Handlebars.compile(source);
