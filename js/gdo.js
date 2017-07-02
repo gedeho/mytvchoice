@@ -1,4 +1,5 @@
 var refreshPage;
+var refreshDelay;
 
 $(document).ready(function(){
 	gdoUpdateProgression();
@@ -26,11 +27,12 @@ function isRefreshRequired(){
 }
 
 function getNewBlock(item){
-	
-	autoRefresh();
+	refreshDelay = setTimeout(autoRefresh, 1000);
+	// autoRefresh();
 }
 
 function autoRefresh(){
+	clearTimeout(refreshDelay);
 	clearInterval(refreshPage);
 	$.getJSON('refresh', function(data){
 		$('.response').html(fillTemplate(data));
