@@ -1,15 +1,41 @@
+var refreshPage;
+
 $(document).ready(function(){
 	gdoUpdateProgression();
-	var refresh = setInterval(gdoUpdateProgression, 1500);
+	var refreshProgress = setInterval(gdoUpdateProgression, 1500);
+	refreshPage = setInterval(isRefreshRequired, 2000)
 	$('.get-datas').on('click', function(){		
 		autoRefresh();
 	})
 })
+// '2017-07-02 17:15:00'
+function isRefreshRequired(){
+	$('.programme-block-container').each(function(){
+		var item = $(this);		
+		var end = item.data('end');
+		var now = moment();
+		if(moment(now).isAfter(end)){
+			console.log('Programme '+item.data('name')+' terminé ('+end+')');
+			item.fadeOut('slow', function(){
+				getNewBlock(item);
+				item.remove();
+			});			
+			return false
+		} 
+	})	 
+}
+
+function getNewBlock(item){
+	
+	autoRefresh();
+}
 
 function autoRefresh(){
+	clearInterval(refreshPage);
 	$.getJSON('refresh', function(data){
 		$('.response').html(fillTemplate(data));
-		$('.testfade').fadeIn('slow');
+		$('.programme-block-container').fadeIn('slow');
+		refreshPage = setInterval(isRefreshRequired, 2000);
 	})
 }
 
@@ -42,28 +68,20 @@ function gdoGetProgression(start, end){
 	return p;
 }
 
-// function isRefreshRequired(p){
-// 	if(p >= 100){
-// 		forceAutoRefresh = true;
-// 		return false;
-// 	}else{
-// 		$(this).css('width', p+'%');
-// 	}
-// 	if(forceAutoRefresh) autoRefresh();	
-// }
+
 
 function gdoUpdateProgression(){
 	var forceAutoRefresh = false;
-	$('.progress-bar').each(function() {
+	$('.programme-block-container').each(function() {
 		var start = $(this).data('start');
 		var end = $(this).data('end');
 		var p = gdoGetProgression(start, end);
-		$(this).css('width', p+'%');			
+		$(this).find('.progress-bar').css('width', p+'%');			
 	});
 
-	$('.time-color').each(function(){
+	$('.programme-block-container').each(function(){
 		var start = $(this).data('start');
 		var now = moment();		
-		if(moment(start).isBefore(now))$(this).css('color', 'red');		
+		if(moment(start).isBefore(now)) $(this).find('.time-color').css('color', 'red');		
 	});
 }
