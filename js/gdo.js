@@ -8,7 +8,37 @@ $(document).ready(function(){
 	$('.get-datas').on('click', function(){		
 		autoRefresh();
 	})
+
+	$('.get-soonFinished').on('click', function(){		
+		getSoonFinished();
+	})
+
+	$('.get-soonStarted').on('click', function(){		
+		getSoonStarted();
+	})
 })
+
+function getSoonFinished(){
+	var finishIn = $('#startIn').val();
+	console.log(finishIn)
+	$.getJSON('getSoonFinished',
+	{a:finishIn}).done(function(data){
+		console.log(data);
+		$('.response').html(fillTemplate(data));
+	})
+}
+
+function getSoonStarted(){
+	var startIn = $('#startIn').val();
+	console.log(startIn)
+	$.getJSON('getSoonStarted',
+	{a:startIn}).done(function(data){
+		console.log(data);
+		$('.response').html(fillTemplate(data));
+	})
+}
+
+
 // '2017-07-02 17:15:00'
 function isRefreshRequired(){
 	$('.programme-block-container').each(function(){
@@ -27,23 +57,25 @@ function isRefreshRequired(){
 }
 
 function getNewBlock(item){
-	refreshDelay = setTimeout(autoRefresh, 1000);
+	// refreshDelay = setTimeout(autoRefresh, 1000);
 	// autoRefresh();
 }
 
 function autoRefresh(){
-	clearTimeout(refreshDelay);
-	clearInterval(refreshPage);
+	
 	$.getJSON('refresh', function(data){
 		$('.response').html(fillTemplate(data));
 		$('.programme-block-container').fadeIn('slow');
-		refreshPage = setInterval(isRefreshRequired, 2000);
+		
 	})
 }
 
 function fillTemplate(data){
+	clearTimeout(refreshDelay);
+	clearInterval(refreshPage);
 	var source   = $("#programme-block-template").html();
 	var template = Handlebars.compile(source);
+	refreshPage = setInterval(isRefreshRequired, 2000);
 	return template(data);
 }
 
@@ -73,7 +105,6 @@ function gdoGetProgression(start, end){
 
 
 function gdoUpdateProgression(){
-	var forceAutoRefresh = false;
 	$('.programme-block-container').each(function() {
 		var start = $(this).data('start');
 		var end = $(this).data('end');

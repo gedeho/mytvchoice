@@ -38,6 +38,20 @@ class Programmestv extends CI_Controller {
         $this->output->set_content_type('application/json');
         echo json_encode($programs);
     }
+
+    public function getSoonFinished(){
+        $finishIn = $this->input->get('a');
+        $programs = $this->programs->getSoonFinished($finishIn);
+        $this->output->set_content_type('application/json');
+        echo json_encode($programs);
+    }
+
+    public function getSoonStarted(){
+        $startIn = $this->input->get('a');
+        $programs = $this->programs->getSoonStarted($startIn);
+        $this->output->set_content_type('application/json');
+        echo json_encode($programs);
+    }
     
 
     public function getCurrent(){
