@@ -20,7 +20,7 @@ class Smartytest extends CI_Controller {
         $data['title'] = "Accueil";
         $data['view']  = "home.tpl";
 
-        $this->parser->parse("master.tpl", $data);
+        $this->parser->parse("home.tpl", $data);
         
     }
 
