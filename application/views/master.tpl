@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{$title nocache} - Gedeho.com</title>
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">  
+    <link rel="icon" type="image/png" href="{base_url('favicon.png')}" sizes="32x32">  
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{base_url('css/styles.css')}">
