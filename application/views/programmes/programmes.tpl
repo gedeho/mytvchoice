@@ -7,7 +7,7 @@
     {block "subnav"}{/block}
 
     {nocache}
-      <div class="response col-xs-12">
+      <div class="response">
         {foreach $programs as $item}
           {include file="programmes/programblock.tpl"}
         {/foreach}
