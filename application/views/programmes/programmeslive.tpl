@@ -1,9 +1,9 @@
 {extends file="programmes/programmes.tpl"} 
 {block "subnav"}
 <div class="subnav clearfix">
-	<div class="col-xs-12 option-toggle">
-		<input class="btn btn-primary get-datas" type="button" value="Actualiser">
-		<a class="btn btn-default pull-right" data-toggle="collapse" href="#collapse" >Options</a>
+	<div class="col-xs-12 option-toggle">		
+		<a class="btn btn-default" data-toggle="collapse" href="#collapse" >Options</a>
+		<input class="btn btn-primary pull-right get-datas" type="button" value="Actualiser">
 	</div>
 	<div class="collapse col-xs-12" id="collapse">
 		<form>
