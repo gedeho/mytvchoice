@@ -9,10 +9,7 @@ $(document).ready(function(){
 
 	// Get & compile the Program-block Template :
 	source = $("#programme-block-template").html();
-	if(source){
-		template = Handlebars.compile(source);
-	}
-	
+	if(source){template = Handlebars.compile(source);}
 
 	// Start Progress-bar & Start-time update process :
 	gdoUpdateProgression();
@@ -26,30 +23,21 @@ $(document).ready(function(){
 });
 
 function gdoInitUserInterface(){
-	$('.get-datas').on('click', function(){autoRefresh();});
-	$('.get-soonFinished').on('click', function(){getSoonFinished();});
-	$('.get-soonStarted').on('click', function(){getSoonStarted();});
+	$('.get-datas').on('click', function(){gdoRefresh();});
+	$('.get-soonFinished').on('click', function(){getPrograms('#finishIn', 'getSoonFinished');});
+	$('.get-soonStarted').on('click', function(){getPrograms('#startIn', 'getSoonStarted');});
 }
 
-function getSoonFinished(){
-	var finishIn = $('#finishIn').val();
-	$.getJSON('getSoonFinished',
-	{a:finishIn}).done(function(data){
-		$('.response').html(fillTemplate(data));
-	});
-}
-
-function getSoonStarted(){
-	var startIn = $('#startIn').val();
-	$.getJSON('getSoonStarted',
-	{a:startIn}).done(function(data){
-		$('.response').html(fillTemplate(data));
-	});
-}
-
-function autoRefresh(){
+function gdoRefresh(){
 	$.getJSON('refresh', function(data){
 		$('.response').html(fillTemplate(data));		
+	});
+}
+
+function getPrograms(field, action){
+	var requestedValue = $(field).val();
+	$.getJSON(action,{a:requestedValue}).done(function(data){
+		$('.response').html(fillTemplate(data));
 	});
 }
 
