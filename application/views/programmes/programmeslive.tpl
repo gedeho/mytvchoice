@@ -34,7 +34,7 @@
 	      <div class="program-details">
 		      <div>       
 		        <p><strong>{{name}}</strong> - <span class="time-color">{{fstart start}}</span> - <span>{{fend end}}</span></p>
-		        <p>{{title}} - {{subtitle}}</p>
+		        <p>{{title}}{{#if subtitle}} - {{subtitle}}{{/if}}</p>
 		        <div class="progress">
 		          <div class="progress-bar" style="width: 0%;"></div>
 		        </div>
