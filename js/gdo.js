@@ -30,14 +30,14 @@ function gdoInitUserInterface(){
 
 function gdoRefresh(){
 	$.getJSON('refresh', function(data){
-		$('.response').html(fillTemplate(data));		
+		$('.response').html(template(data));		
 	});
 }
 
 function getPrograms(field, action){
 	var requestedValue = $(field).val();
 	$.getJSON(action,{a:requestedValue}).done(function(data){
-		$('.response').html(fillTemplate(data));
+		$('.response').html(template(data));
 	});
 }
 
@@ -55,12 +55,13 @@ function FindTerminatedPrograms(){
 	removeTerminatedPrograms();
 }
 
-function fillTemplate(data){
-	// Reset the Terminated-Programs removing process :
-	clearInterval(refreshPage);
-	refreshPage = setInterval(FindTerminatedPrograms, 2000);
-	return template(data);
-}
+// function fillTemplate(data){
+// 	// Reset the Terminated-Programs removing process :
+// 	clearInterval(refreshPage);
+// 	refreshPage = setInterval(FindTerminatedPrograms, 2000);
+// 	// Return the program-block template with relevant datas :
+// 	return template(data);
+// }
 
 function removeTerminatedPrograms(){
 	terminatedPrograms.forEach(function(item){
