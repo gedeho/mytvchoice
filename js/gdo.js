@@ -3,20 +3,24 @@
 var refreshPage;
 var source;
 var template;
+var programGrid;
 var terminatedPrograms = new Array();
 
 $(document).ready(function(){
+
+	// Get the program-grid area :
+	programGrid = $('.response');
 
 	// Get & compile the Program-block Template :
 	source = $("#programme-block-template").html();
 	if(source){template = Handlebars.compile(source);}
 
-	// Start Progress-bar & Start-time update process :
+	// Update Progress-Bars & Start-Time color every 1500ms :
 	gdoUpdateProgression();
 	var refreshProgress = setInterval(gdoUpdateProgression, 1500);
 
-	// Start the Terminated-Programs removing process :
-	refreshPage = setInterval(FindTerminatedPrograms, 2000);
+	// Look for Terminated-Programs every 15 seconds :
+	refreshPage = setInterval(FindTerminatedPrograms, 15000);
 
 	// Intialize the user-interface :
 	gdoInitUserInterface();	
@@ -30,14 +34,14 @@ function gdoInitUserInterface(){
 
 function gdoRefresh(){
 	$.getJSON('refresh', function(data){
-		$('.response').html(template(data));		
+		programGrid.html(template(data));		
 	});
 }
 
 function getPrograms(field, action){
 	var requestedValue = $(field).val();
 	$.getJSON(action,{a:requestedValue}).done(function(data){
-		$('.response').html(template(data));
+		programGrid.html(template(data));
 	});
 }
 
@@ -55,14 +59,6 @@ function FindTerminatedPrograms(){
 	removeTerminatedPrograms();
 }
 
-// function fillTemplate(data){
-// 	// Reset the Terminated-Programs removing process :
-// 	clearInterval(refreshPage);
-// 	refreshPage = setInterval(FindTerminatedPrograms, 2000);
-// 	// Return the program-block template with relevant datas :
-// 	return template(data);
-// }
-
 function removeTerminatedPrograms(){
 	terminatedPrograms.forEach(function(item){
 		item.fadeOut('slow', function(){
@@ -78,7 +74,6 @@ Handlebars.registerHelper('fstart', function(){
 Handlebars.registerHelper('fend', function(){
 	return moment(this.end).format('HH:mm');
 });
-
 
 function gdoUpdateProgression(){
 	updateProgressBar();

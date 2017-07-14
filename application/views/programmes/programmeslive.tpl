@@ -32,14 +32,14 @@
 	    <div class="programme-block  clearfix">
 	      <img src="{{imgurl}}" onerror="this.src='../img/error_img.png'"/>
 	      <div class="program-details">
-		      <div>       
-		        <p><strong>{{name}}</strong> - <span class="time-color">{{fstart start}}</span> - <span>{{fend end}}</span></p>
+	      	<p class="program-channel"><strong>{{name}}</strong> - <span class="time-color">{{fstart start}}</span> - <span>{{fend end}}</span></p>
 		        <p>{{title}}{{#if subtitle}} - {{subtitle}}{{/if}}</p>
-		        <div class="progress">
-		          <div class="progress-bar" style="width: 0%;"></div>
-		        </div>
-		        <p><em>{{length}}mn</em></p>
-		      </div>
+		        <div class="progression">
+			        <div class="progress">
+			          <div class="progress-bar" style="width: 0%;"></div>
+			        </div>
+			        <p class="program-length"><em>{{length}}mn</em></p>
+		        </div>	        
 	      </div>
 	    </div>
 	  </div>

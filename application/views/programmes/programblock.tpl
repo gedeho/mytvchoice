@@ -4,14 +4,17 @@
   <div class="programme-block clearfix">
 		<img src="{$item->imgurl}" onerror="this.src='{base_url('img/error_img.png')}'"/>
 		<div class="program-details">
-			<div>				
-				<p><strong>{$item->name}</strong> - <span class="time-color">{$start}</span> - <span>{$end}</span></p>
+			<p class="program-channel"><strong>{$item->name}</strong> - <span class="time-color">{$start}</span> - <span>{$end}</span></p>
+
 				<p>{$item->title} {if $item->subtitle}- {$item->subtitle}{/if}</p>
-				<div class="progress">
-					<div class="progress-bar" style="width: 0%;"></div>
+				<div class="progression">
+
+					<div class="progress">
+						<div class="progress-bar" style="width: 0%;"></div>
+					</div>
+					<p class="program-length"><em>{$item->length}mn</em></p>
 				</div>
-				<p><em>{$item->length}mn</em></p>
-			</div>
+				
 		</div>
   </div>
 </div>

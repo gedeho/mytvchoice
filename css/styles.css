@@ -38,10 +38,16 @@ body{
     font-size: 2.5em;
 }
 
+.progression{
+    position: absolute;
+    width: 92%;
+    top: 90px;
+}
+
 .progress{
     height: 7px;
     background-color: #e2e2e2;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .legend{
@@ -58,7 +64,7 @@ body{
 }
 
 .programme-block{
-    min-height: 400px;
+    min-height: 350px;
     margin-bottom: 15px;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -68,7 +74,6 @@ body{
 
 .programme-block:hover{
     margin-bottom: 15px;
-    /*border-radius: 5px;*/
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
@@ -77,12 +82,22 @@ body{
     width: 100%;
     overflow: hidden;
     border-radius: 3px 3px 0 0;
-    /*height: 155px;*/
 }
 
 .program-details{
     padding: 10px;
     padding-bottom: 0;
+    position: relative;
+}
+
+.program-channel{
+    margin-bottom: 5px;
+}
+
+.program-length{
+    text-align: right;
+    margin-right: 5px;
+    font-size: 12px;
 }
 
 .red{
