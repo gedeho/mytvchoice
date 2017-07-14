@@ -94,10 +94,23 @@ body{
     margin-bottom: 5px;
 }
 
+.program-title{
+    line-height: 16px;
+}
+
+.program-title em{
+    font-size: 12px;
+}
+
 .program-length{
     text-align: right;
     margin-right: 5px;
     font-size: 12px;
+}
+
+
+#channelSelection{
+
 }
 
 .red{
