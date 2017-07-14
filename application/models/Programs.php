@@ -21,10 +21,11 @@ class Programs extends CI_Model {
         // effacer tous les programmes < à la date du jour
     }
 
-	public function getCurrent(){
+	public function getCurrent($selection){
         $this->db->where("start <= NOW()", NULL, FALSE);
         $this->db->where("end >= NOW()", NULL, FALSE);
         $this->db->join('channels', 'channels.channelId = programs.channelId');
+        $this->db->where_in('programs.channelId', $selection);
         $this->db->order_by('programs.channelId ASC, start ASC');
         return $this->db->get('programs')->result();
 	}

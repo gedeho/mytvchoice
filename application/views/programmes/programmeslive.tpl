@@ -3,6 +3,7 @@
 <div class="subnav clearfix">
 	<div class="col-xs-12 option-toggle">		
 		<a class="btn btn-default" data-toggle="collapse" href="#collapse" >Options</a>
+		<input class="btn btn-default channel-selection" data-toggle="modal" data-target="#channelSelection" type="button" value="Select channels">
 		<input class="btn btn-primary pull-right get-datas" type="button" value="Actualiser">
 	</div>
 	<div class="collapse col-xs-12" id="collapse">
@@ -13,6 +14,7 @@
 				<span>mn</span>
 				<input class="btn btn-default pull-right get-soonFinished" type="button" value="Go !">
 			</div>
+
 			<div class="form-group">
 				<span >Début dans moins de :</span>
 				<input type="number" class="form-control" id="startIn" placeholder="30" value="30" step="10">
@@ -22,7 +24,12 @@
 		</form>	
 	</div>
 </div>
+
+{include file="programmes/channelselection.tpl"}
+
 {/block}
+
+
 
 {block "programme-block-template"}
 	{literal}
@@ -33,7 +40,7 @@
 					  <img src="{{imgurl}}" onerror="this.src='../img/error_img.png'"/>
 					  <div class="program-details">
 					  	<p class="program-channel"><strong>{{name}}</strong> - <span class="time-color">{{fstart start}}</span> - <span>{{fend end}}</span></p>
-					        <p>{{title}}{{#if subtitle}}<em> - {{subtitle}}{{/if}}</em></p>
+					        <p class="program-title">{{title}}{{#if subtitle}}<em> - {{subtitle}}{{/if}}</em></p>
 					        <div class="progression">
 						        <div class="progress">
 						          <div class="progress-bar" style="width: 0%;"></div>

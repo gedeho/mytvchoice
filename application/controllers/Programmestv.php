@@ -34,7 +34,8 @@ class Programmestv extends CI_Controller {
     }
 
     public function refresh(){
-        $programs = $this->programs->getCurrent();
+        $selection = $this->input->get('channels');
+        $programs = $this->programs->getCurrent($selection);
         $this->output->set_content_type('application/json');
         echo json_encode($programs);
     }
@@ -55,9 +56,16 @@ class Programmestv extends CI_Controller {
     
 
     public function getCurrent(){
-        $results = $this->programs->getCurrent();
+        if($this->input->cookie('channelselection')){
+            $channelselection = json_decode($this->input->cookie('channelselection'));
+        }
+        else{
+            $channelselection = array("2", "3", "13", "5", "6", "1");
+        }
+        $results = $this->programs->getCurrent($channelselection);
         $data['pageId'] = 0;
         $data['programs'] = $results;
+        $data['channels'] = $this->channels->getChannels();
         $data['title'] = "Programmes TV en cours de diffusion";
         $this->parser->parse("programmes/programmeslive.tpl", $data);      	
     }
@@ -76,7 +84,12 @@ class Programmestv extends CI_Controller {
         }             
     }
 
-    
+    public function getSelectedChannels()
+    {
+        // $data['channels'] = $this->channels->getChannels();
+        // $this->output->set_content_type('application/json');
+        echo json_encode($this->input->get('channels'));
+    }
 
     
 

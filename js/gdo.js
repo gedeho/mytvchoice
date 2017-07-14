@@ -5,6 +5,7 @@ var source;
 var template;
 var programGrid;
 var terminatedPrograms = new Array();
+var channelSelection = new Array();
 
 $(document).ready(function(){
 
@@ -24,18 +25,54 @@ $(document).ready(function(){
 
 	// Intialize the user-interface :
 	gdoInitUserInterface();	
+
+	// Check channels in "Channel Selection" popin according to cookie value :
+	initChannelSelection();
 });
 
 function gdoInitUserInterface(){
 	$('.get-datas').on('click', function(){gdoRefresh();});
+	$('.save-channels').on('click', function(){saveSelectedChannels();});
 	$('.get-soonFinished').on('click', function(){getPrograms('#finishIn', 'getSoonFinished');});
 	$('.get-soonStarted').on('click', function(){getPrograms('#startIn', 'getSoonStarted');});
 }
 
+function initChannelSelection(){
+	if(Cookies.getJSON('channelselection') != null){
+		Cookies.getJSON('channelselection').forEach(function(element){
+			$("input[value="+element+"]").attr('checked', true);
+		});
+	}
+}
+
 function gdoRefresh(){
-	$.getJSON('refresh', function(data){
-		programGrid.html(template(data));		
+	var selectedChannels = getChannelSelection();
+	$.getJSON('refresh',{channels:selectedChannels}).done(function(data){
+		programGrid.html(template(data));
+	});	
+}
+
+function getChannelSelection(){
+	if(Cookies.getJSON('channelselection') != null){
+		return Cookies.getJSON('channelselection');
+	}
+	else{
+		if(channelSelection.length <= 0){
+		$("input:checked").each(function(){
+			channelSelection.push($(this).val());
+		});
+	}
+	return channelSelection;
+	}	
+}
+
+function saveSelectedChannels(){
+	channelSelection.length = 0;
+	$("input:checked").each(function(){
+		channelSelection.push($(this).val());
 	});
+	Cookies.set('channelselection', channelSelection, {expires:7});
+	gdoRefresh();
 }
 
 function getPrograms(field, action){
@@ -112,3 +149,4 @@ function updateStartColor(){
 		if(moment(start).isBefore(now)) $(this).find('.time-color').css('color', 'red');		
 	});
 }
+

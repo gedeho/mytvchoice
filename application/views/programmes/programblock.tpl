@@ -5,7 +5,7 @@
 		<img src="{$item->imgurl}" onerror="this.src='{base_url('img/error_img.png')}'"/>
 		<div class="program-details">
 			<p class="program-channel"><strong>{$item->name}</strong> - <span class="time-color">{$start}</span> - <span>{$end}</span></p>
-			<p>{$item->title} {if $item->subtitle}<em>- {$item->subtitle}</em>{/if}</p>
+			<p class="program-title">{$item->title} {if $item->subtitle}<em>- {$item->subtitle}</em>{/if}</p>
 			<div class="progression">
 				<div class="progress">
 					<div class="progress-bar" style="width: 0%;"></div>

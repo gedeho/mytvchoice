@@ -12,6 +12,9 @@ class Channels extends CI_Model {
     	}
 
     	public function getChannels(){
-    		return $this->db->get('channels')->result();
+            $this->db->order_by('channelId ASC');
+            return $this->db->get('channels')->result();
     	}
+
+       
 }
