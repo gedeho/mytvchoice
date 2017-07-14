@@ -5,16 +5,13 @@
 		<img src="{$item->imgurl}" onerror="this.src='{base_url('img/error_img.png')}'"/>
 		<div class="program-details">
 			<p class="program-channel"><strong>{$item->name}</strong> - <span class="time-color">{$start}</span> - <span>{$end}</span></p>
-
-				<p>{$item->title} {if $item->subtitle}- {$item->subtitle}{/if}</p>
-				<div class="progression">
-
-					<div class="progress">
-						<div class="progress-bar" style="width: 0%;"></div>
-					</div>
-					<p class="program-length"><em>{$item->length}mn</em></p>
+			<p>{$item->title} {if $item->subtitle}<em>- {$item->subtitle}</em>{/if}</p>
+			<div class="progression">
+				<div class="progress">
+					<div class="progress-bar" style="width: 0%;"></div>
 				</div>
-				
+				<p class="program-length"><em>{$item->length}mn</em></p>
+			</div>				
 		</div>
   </div>
 </div>
