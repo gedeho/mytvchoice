@@ -24,11 +24,25 @@ $(document).ready(function(){
 	refreshPage = setInterval(FindTerminatedPrograms, 15000);
 
 	// Intialize the user-interface :
-	gdoInitUserInterface();	
+	gdoInitUserInterface();		
 
-	// Check channels in "Channel Selection" popin according to cookie value :
-	initChannelSelection();
+	// Actions to perform on "getCurrent" page only :
+	if (/getCurrent/.test(window.location.href)){
+		// Check channels in "Channel Selection" popin according to cookie value :
+		initChannelSelection();
+		// Extends channelselection cookie :
+		setChannelSelectionCookie();
+	}
 });
+
+function setChannelSelectionCookie(){
+	channelSelection.length = 0;
+	$("input:checked").each(function(){
+		channelSelection.push($(this).val());
+	});
+	Cookies.set('channelselection', channelSelection, {expires:7});
+	return channelSelection;
+}
 
 function gdoInitUserInterface(){
 	$('.get-datas').on('click', function(){gdoRefresh();});
@@ -57,21 +71,12 @@ function getChannelSelection(){
 		return Cookies.getJSON('channelselection');
 	}
 	else{
-		if(channelSelection.length <= 0){
-		$("input:checked").each(function(){
-			channelSelection.push($(this).val());
-		});
+		return setChannelSelectionCookie();
 	}
-	return channelSelection;
-	}	
 }
 
 function saveSelectedChannels(){
-	channelSelection.length = 0;
-	$("input:checked").each(function(){
-		channelSelection.push($(this).val());
-	});
-	Cookies.set('channelselection', channelSelection, {expires:7});
+	setChannelSelectionCookie();
 	gdoRefresh();
 }
 

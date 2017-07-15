@@ -1,4 +1,4 @@
-<div class="modal fade bs-example-modal-lg" id="channelSelection">
+<div class="modal fade bs-example-modal-sm" id="channelSelection">
   <div class="modal-dialog modal-sm" >
     <div class="modal-content">
 		<div class="modal-header">
