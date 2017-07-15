@@ -6,6 +6,11 @@ body{
     margin-bottom: 15px;
 }
 
+.channel-selection:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .option-toggle{
     margin-bottom: 15px;
 }

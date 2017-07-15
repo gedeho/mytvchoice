@@ -27,11 +27,13 @@ $(document).ready(function(){
 	gdoInitUserInterface();		
 
 	// Actions to perform on "getCurrent" page only :
-	if (/getCurrent/.test(window.location.href)){
+	if (/single/.test(window.location.href)){
 		// Check channels in "Channel Selection" popin according to cookie value :
 		initChannelSelection();
 		// Extends channelselection cookie :
 		setChannelSelectionCookie();
+		// display programs on selected channels
+		gdoRefresh();
 	}
 });
 
@@ -47,8 +49,16 @@ function setChannelSelectionCookie(){
 function gdoInitUserInterface(){
 	$('.get-datas').on('click', function(){gdoRefresh();});
 	$('.save-channels').on('click', function(){saveSelectedChannels();});
+	$('.prog1').on('click', function(){getEveningPrograms(1);});
+	$('.prog2').on('click', function(){getEveningPrograms(2);});
 	$('.get-soonFinished').on('click', function(){getPrograms('#finishIn', 'getSoonFinished');});
 	$('.get-soonStarted').on('click', function(){getPrograms('#startIn', 'getSoonStarted');});
+}
+
+function getEveningPrograms(value){
+	$.getJSON('getEveningPrograms',{creneau:value}).done(function(data){
+		programGrid.html(template(data));
+	});
 }
 
 function initChannelSelection(){
