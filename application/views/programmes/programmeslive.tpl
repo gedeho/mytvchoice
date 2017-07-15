@@ -3,7 +3,7 @@
 <div class="subnav clearfix">
 	<div class="col-xs-12 option-toggle">		
 		<a class="btn btn-default" data-toggle="collapse" href="#collapse" >Options</a>
-		<input class="btn btn-default channel-selection" data-toggle="modal" data-target="#channelSelection" type="button" value="Select channels">
+		<input class="btn btn-default channel-selection" data-toggle="modal" data-target="#channelSelection" type="button" value="Channels">
 		<input class="btn btn-primary pull-right get-datas" type="button" value="Actualiser">
 	</div>
 	<div class="collapse col-xs-12" id="collapse">

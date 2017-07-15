@@ -110,6 +110,7 @@ function removeTerminatedPrograms(){
 	terminatedPrograms.length = 0;
 }
 
+// Handlebars helpers resgitrations :
 Handlebars.registerHelper('fstart', function(){
 	return moment(this.start).format('HH:mm');
 });
