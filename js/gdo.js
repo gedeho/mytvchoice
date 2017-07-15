@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 	// Update Progress-Bars & Start-Time color every 1500ms :
 	gdoUpdateProgression();
-	var refreshProgress = setInterval(gdoUpdateProgression, 1500);
+	var refreshProgress = setInterval(gdoUpdateProgression, 1000);
 
 	// Look for Terminated-Programs every 15 seconds :
 	refreshPage = setInterval(FindTerminatedPrograms, 15000);
@@ -66,6 +66,9 @@ function initChannelSelection(){
 		Cookies.getJSON('channelselection').forEach(function(element){
 			$("input[value="+element+"]").attr('checked', true);
 		});
+	}
+	else{
+		$("input:checkbox").attr('checked', true);
 	}
 }
 

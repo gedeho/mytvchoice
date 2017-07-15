@@ -25,15 +25,7 @@ class Singlepageapp extends CI_Controller {
 
     public function index(){
         $channelsList = $this->input->cookie('channelselection');
-        
-        if($channelsList && count($channelsList)> 1){
-            echo (count($this->input->cookie('channelselection')));
-            echo $this->input->cookie('channelselection');
-            $channelselection = json_decode($this->input->cookie('channelselection'));
-        }
-        else{
-            $channelselection = array("2", "3", "13", "5", "6", "1");
-        }
+        $channelselection = $this->getUserSelection($channelsList);
         $results = $this->programs->getCurrent($channelselection);
         $data['programs'] = $results;
         $data['title'] = "Programmes TV en cours de diffusion";
@@ -55,12 +47,8 @@ class Singlepageapp extends CI_Controller {
     }
 
     public function getCurrent(){
-        if($this->input->cookie('channelselection')){
-            $channelselection = json_decode($this->input->cookie('channelselection'));
-        }
-        else{
-            $channelselection = array("2", "3", "13", "5", "6", "1");
-        }
+        $channelsList = $this->input->cookie('channelselection');
+        $channelselection = $this->getUserSelection($channelsList);
         $results = $this->programs->getCurrent($channelselection);
         $data['programs'] = $results;
         $data['channels'] = $this->channels->getChannels();
@@ -69,14 +57,8 @@ class Singlepageapp extends CI_Controller {
     }
 
     public function getEveningPrograms(){
-        $channelsList = $this->input->cookie('channelselection');
-        
-        if($channelsList && count($channelsList)> 0){
-            $channelselection = json_decode($channelsList);
-        }
-        else{
-            $channelselection = array("2", "3", "13", "5", "6", "1");
-        }
+        $channelsList = $this->input->cookie('channelselection'); 
+        $channelselection = $this->getUserSelection($channelsList);
         $creneau = $this->input->get('creneau');
         $startA = $this->config->item('eveningStart'.$creneau);
         $startB = $this->config->item('eveningEnd'.$creneau);
@@ -102,5 +84,18 @@ class Singlepageapp extends CI_Controller {
         $programs = $this->programs->getSoonStarted($startIn);
         $this->output->set_content_type('application/json');
         echo json_encode($programs);
+    }
+
+    private function getUserSelection($channelsList){
+               
+        if($channelsList && count($channelsList)> 0){
+            $channelselection = json_decode($this->input->cookie('channelselection'));
+            // print_r($channelselection);
+        }
+        else{
+            $channelselection = array("2", "3", "13", "5", "6", "1");
+        }
+        
+        return $channelselection;
     }    
 }
