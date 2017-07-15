@@ -20,23 +20,17 @@ class Singlepageapp extends CI_Controller {
         parent::__construct();
         $this->load->model('channels', '', TRUE);
         $this->load->model('programs', '', TRUE);
+        $channelsList = $this->input->cookie('channelselection');
+        $this->channelselection = $this->getUserSelection($channelsList);
         $this->config->load('gedeho');
     }
 
     public function index(){
-        $channelsList = $this->input->cookie('channelselection');
-        $channelselection = $this->getUserSelection($channelsList);
-        $results = $this->programs->getCurrent($channelselection);
+        $results = $this->programs->getCurrent($this->channelselection);
         $data['programs'] = $results;
         $data['title'] = "Programmes TV du ".date("d-m-Y");
         $data['channels'] = $this->channels->getChannels();
         $this->parser->parse("programmes/singlepage.tpl", $data);   
-    }
-
-    public function updateFeed(){
-        $this->load->library('feedupdater');
-        $this->feedupdater->updateFeed();
-        redirect('programmestv/getCurrent');
     }
 
     public function refresh(){
@@ -46,23 +40,11 @@ class Singlepageapp extends CI_Controller {
         echo json_encode($programs);
     }
 
-    public function getCurrent(){
-        $channelsList = $this->input->cookie('channelselection');
-        $channelselection = $this->getUserSelection($channelsList);
-        $results = $this->programs->getCurrent($channelselection);
-        $data['programs'] = $results;
-        $data['channels'] = $this->channels->getChannels();
-        $data['title'] = "Programmes TV du".date("l");
-        $this->parser->parse("programmes/programmeslive.tpl", $data);      	
-    }
-
     public function getEveningPrograms(){
-        $channelsList = $this->input->cookie('channelselection'); 
-        $channelselection = $this->getUserSelection($channelsList);
         $creneau = $this->input->get('creneau');
         $startA = $this->config->item('eveningStart'.$creneau);
         $startB = $this->config->item('eveningEnd'.$creneau);
-        $programs = $this->programs->getRange($startA, $startB, $channelselection);
+        $programs = $this->programs->getRange($startA, $startB, $this->channelselection);
         $this->output->set_content_type('application/json');
         echo json_encode($programs);
     }
@@ -89,5 +71,11 @@ class Singlepageapp extends CI_Controller {
             $channelselection = array("2", "3", "13", "5", "6", "1");
         }        
         return $channelselection;
-    }    
+    }
+
+    public function updateFeed(){
+        $this->load->library('feedupdater');
+        $this->feedupdater->updateFeed();
+        redirect('programmestv/getCurrent');
+    }
 }
