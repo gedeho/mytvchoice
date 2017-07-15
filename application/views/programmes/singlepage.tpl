@@ -13,11 +13,17 @@
 	<div class="container">
 
 		<div class="subnav clearfix">
-			<div class="col-xs-12 option-toggle">		
+			<div class="col-xs-12 option-toggle control-buttons " data-toggle="buttons">		
 				{* <a class="btn btn-default" data-toggle="collapse" href="#collapse" >Options</a>	 *}
-				<input class="btn btn-primary get-datas" type="button" value="En cours">
-				<input class="btn btn-default prog1" type="button" value="Soirée 1">
-				<input class="btn btn-default prog2" type="button" value="Soirée 2">
+				<label class="btn btn-default now active">
+					<input type="radio" name="options" id="option1" autocomplete="off" checked> En cours
+				</label>
+				<label class="btn btn-default prog1">
+					<input type="radio" name="options" id="option2" autocomplete="off"> Soirée 1
+				</label>
+				<label class="btn btn-default prog2">
+					<input type="radio" name="options" id="option3" autocomplete="off"> Soirée 2
+				</label>
 			</div>
 			<div class="collapse col-xs-12" id="collapse">
 				<form>

@@ -54,7 +54,7 @@ function setChannelSelectionCookie(){
 }
 
 function gdoInitUserInterface(){
-	$('.get-datas').on('click', function(){gdoRefresh();});
+	$('.now').on('click', function(){gdoRefresh();});
 	$('.save-channels').on('click', function(){saveSelectedChannels();});
 	$('.prog1').on('click', function(){getEveningPrograms(1);});
 	$('.prog2').on('click', function(){getEveningPrograms(2);});
