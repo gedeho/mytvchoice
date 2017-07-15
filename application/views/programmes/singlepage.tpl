@@ -25,7 +25,7 @@
 					<input type="radio" name="options" id="option3" autocomplete="off"> Soirée 2
 				</label>
 			</div>
-			<div class="collapse col-xs-12" id="collapse">
+			{* <div class="collapse col-xs-12" id="collapse">
 				<form>
 					<div class="form-group">
 						<span>Fin dans moins de :</span>
@@ -41,7 +41,7 @@
 						<input class="btn btn-default pull-right get-soonStarted" type="button" value="Go !">   
 					</div>
 				</form>	
-			</div>
+			</div> *}
 		</div>
 		<div class="row">
 			<div class="response"></div>
