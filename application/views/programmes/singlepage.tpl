@@ -4,7 +4,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">			
-				<span class="navbar-brand">Programmes TV</span>
+				<span class="navbar-brand">Programmes TV du <span class="date-title"></span></span>
 			</div>
 			<p class="navbar-text navbar-right channel-selection" data-toggle="modal" data-target="#channelSelection">Liste des chaînes</p>
 		</div>

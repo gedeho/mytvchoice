@@ -28,7 +28,7 @@ class Singlepageapp extends CI_Controller {
         $channelselection = $this->getUserSelection($channelsList);
         $results = $this->programs->getCurrent($channelselection);
         $data['programs'] = $results;
-        $data['title'] = "Programmes TV en cours de diffusion";
+        $data['title'] = "Programmes TV du ".date("d-m-Y");
         $data['channels'] = $this->channels->getChannels();
         $this->parser->parse("programmes/singlepage.tpl", $data);   
     }
@@ -52,7 +52,7 @@ class Singlepageapp extends CI_Controller {
         $results = $this->programs->getCurrent($channelselection);
         $data['programs'] = $results;
         $data['channels'] = $this->channels->getChannels();
-        $data['title'] = "Programmes TV en cours de diffusion";
+        $data['title'] = "Programmes TV du".date("l");
         $this->parser->parse("programmes/programmeslive.tpl", $data);      	
     }
 
@@ -65,11 +65,6 @@ class Singlepageapp extends CI_Controller {
         $programs = $this->programs->getRange($startA, $startB, $channelselection);
         $this->output->set_content_type('application/json');
         echo json_encode($programs);
-    }
-
-    public function getSelectedChannels()
-    {
-        echo json_encode($this->input->get('channels'));
     }
 
     public function getSoonFinished(){
@@ -86,16 +81,13 @@ class Singlepageapp extends CI_Controller {
         echo json_encode($programs);
     }
 
-    private function getUserSelection($channelsList){
-               
+    private function getUserSelection($channelsList){               
         if($channelsList && count($channelsList)> 0){
             $channelselection = json_decode($this->input->cookie('channelselection'));
-            // print_r($channelselection);
         }
         else{
             $channelselection = array("2", "3", "13", "5", "6", "1");
-        }
-        
+        }        
         return $channelselection;
     }    
 }

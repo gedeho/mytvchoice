@@ -34,8 +34,15 @@ $(document).ready(function(){
 		setChannelSelectionCookie();
 		// display programs on selected channels
 		gdoRefresh();
+		// Display the current date :
+		displayCurrentDate();
 	}
 });
+
+function displayCurrentDate(){
+	var currentDate = moment().format('dddd D MMMM');
+	$('.date-title').text(currentDate);
+}
 
 function setChannelSelectionCookie(){
 	channelSelection.length = 0;
