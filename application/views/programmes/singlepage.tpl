@@ -26,7 +26,7 @@
 				</label>
 			</div>
 			{* <div class="collapse col-xs-12" id="collapse">
-				<form>
+				<form> 
 					<div class="form-group">
 						<span>Fin dans moins de :</span>
 						<input type="number" class="form-control" id="finishIn" placeholder="30" value="30" step="10">
@@ -48,7 +48,8 @@
 		</div>
 	</div>
 	{include file="programmes/channelselection.tpl"}
-	{include file="programmes/programblock.tpl"}
+	{include file="programmes/main-menu.tpl"}
+	{* {include file="programmes/programblock.tpl"} *}
 {/block}
 
 {block "scripts"}
@@ -56,5 +57,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/fr.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
 <script src="{base_url('js/js.cookie.js')}"></script>
-<script src="{base_url('js/gdo.js')}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.min.js"></script>
+<script src="{base_url('js/main-menu.js')}"></script>
+{* <script src="{base_url('js/gdo.js')}"></script> *}
 {/block}
