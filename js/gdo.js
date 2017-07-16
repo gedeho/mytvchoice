@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 	// Update Progress-Bars & Start-Time color every 1500ms :
 	gdoUpdateProgression();
-	var refreshProgress = setInterval(gdoUpdateProgression, 1500);
+	var refreshProgress = setInterval(gdoUpdateProgression, 1000);
 
 	// Look for Terminated-Programs every 15 seconds :
 	refreshPage = setInterval(FindTerminatedPrograms, 15000);
@@ -27,13 +27,22 @@ $(document).ready(function(){
 	gdoInitUserInterface();		
 
 	// Actions to perform on "getCurrent" page only :
-	if (/getCurrent/.test(window.location.href)){
+	if (/single/.test(window.location.href)){
 		// Check channels in "Channel Selection" popin according to cookie value :
 		initChannelSelection();
 		// Extends channelselection cookie :
 		setChannelSelectionCookie();
+		// display programs on selected channels
+		gdoRefresh();
+		// Display the current date :
+		displayCurrentDate();
 	}
 });
+
+function displayCurrentDate(){
+	var currentDate = moment().format('dddd D MMMM');
+	$('.date-title').text(currentDate);
+}
 
 function setChannelSelectionCookie(){
 	channelSelection.length = 0;
@@ -45,10 +54,18 @@ function setChannelSelectionCookie(){
 }
 
 function gdoInitUserInterface(){
-	$('.get-datas').on('click', function(){gdoRefresh();});
+	$('.now').on('click', function(){gdoRefresh();});
 	$('.save-channels').on('click', function(){saveSelectedChannels();});
+	$('.prog1').on('click', function(){getEveningPrograms(1);});
+	$('.prog2').on('click', function(){getEveningPrograms(2);});
 	$('.get-soonFinished').on('click', function(){getPrograms('#finishIn', 'getSoonFinished');});
 	$('.get-soonStarted').on('click', function(){getPrograms('#startIn', 'getSoonStarted');});
+}
+
+function getEveningPrograms(value){
+	$.getJSON('getEveningPrograms',{creneau:value}).done(function(data){
+		programGrid.html(template(data));
+	});
 }
 
 function initChannelSelection(){
@@ -56,6 +73,9 @@ function initChannelSelection(){
 		Cookies.getJSON('channelselection').forEach(function(element){
 			$("input[value="+element+"]").attr('checked', true);
 		});
+	}
+	else{
+		$("input:checkbox").attr('checked', true);
 	}
 }
 
