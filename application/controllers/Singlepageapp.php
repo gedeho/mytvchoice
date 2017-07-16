@@ -36,8 +36,7 @@ class Singlepageapp extends CI_Controller {
     public function refresh(){
         $selection = $this->input->get('channels');
         $programs = $this->programs->getCurrent($selection);
-        $this->output->set_content_type('application/json');
-        echo json_encode($programs);
+        $this->parseResponse($programs);
     }
 
     public function getEveningPrograms(){
@@ -45,22 +44,19 @@ class Singlepageapp extends CI_Controller {
         $startA = $this->config->item('eveningStart'.$creneau);
         $startB = $this->config->item('eveningEnd'.$creneau);
         $programs = $this->programs->getRange($startA, $startB, $this->channelselection);
-        $this->output->set_content_type('application/json');
-        echo json_encode($programs);
+        $this->parseResponse($programs);
     }
 
     public function getSoonFinished(){
         $finishIn = $this->input->get('a');
         $programs = $this->programs->getSoonFinished($finishIn);
-        $this->output->set_content_type('application/json');
-        echo json_encode($programs);
+        $this->parseResponse($programs);
     }
 
     public function getSoonStarted(){
         $startIn = $this->input->get('a');
         $programs = $this->programs->getSoonStarted($startIn);
-        $this->output->set_content_type('application/json');
-        echo json_encode($programs);
+        $this->parseResponse($programs);        
     }
 
     private function getUserSelection($channelsList){               
@@ -71,6 +67,11 @@ class Singlepageapp extends CI_Controller {
             $channelselection = array("2", "3", "13", "5", "6", "1");
         }        
         return $channelselection;
+    }
+
+    private function parseResponse($datas){
+        $this->output->set_content_type('application/json');
+        echo json_encode($datas);
     }
 
     public function updateFeed(){
