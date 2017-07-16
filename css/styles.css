@@ -125,6 +125,16 @@ body{
     color: #00a945;
 }
 
+.activated,
+.btn-default:active,
+.btn-default:focus{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;}
+
+
+
+
 @media (min-width: 1200px){
 
 }
