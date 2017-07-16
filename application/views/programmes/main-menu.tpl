@@ -2,7 +2,8 @@
 <div class="container">
 	<row>
 		<div id="app">
-		  {{ message }}
+		  <span v-if="seen">{{ message }}</span>
+		  <button class="btn btn-default" v-bind:disabled="isButtonDisabled">Button</button>
 		</div>
 	</div>
 </div>
