@@ -25,7 +25,7 @@
 
 {literal}
 <template id="prog-card">
-	<div class="col-xs-12 col-sm-4 col-md-3 programme-block-container"  v-bind:data-name="prog.title" v-bind:data-start='prog.start' v-bind:data-end="prog.end">
+	<div class="col-xs-12 col-sm-4 col-md-3 programme-block-container">
 		<div class="programme-block  clearfix">
 			<img v-bind:src="prog.imgurl" onerror="this.src='img/error_img.png'"/>
 			<div class="program-details">
@@ -33,7 +33,7 @@
 				<p class="program-title">{{prog.title}}<em v-if='prog.subtitle'> - {{prog.subtitle}}</em></p>
 				<div class="progression">
 					<div class="progress">
-						<div class="progress-bar" style="width: 0%;"></div>
+						<div class="progress-bar" v-bind:style="progression"></div>
 					</div>
 					<p class="program-length"><em>{{prog.length}}mn</em></p>
 				</div>	        
