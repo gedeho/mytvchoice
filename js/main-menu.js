@@ -28,7 +28,7 @@ Vue.component('program-card',{
 	template : '#prog-card',
 	data:function(){
 		return{
-			progression:'0%'		
+			progression:'0'		
 		}
 	},
 	computed:{
@@ -41,6 +41,9 @@ Vue.component('program-card',{
 		timeBetweenStartAndEnd:function()
 		{
 			return (this.endInMs - this.startInMs);
+		},
+		progressionStyle:function(){
+			return "width:"+this.progression+"%";
 		}
 
 	},
@@ -54,7 +57,7 @@ Vue.component('program-card',{
 	},
 	methods:{
 		updateProgressBar:function(){
-			this.progression = "width:"+this.getProgression()+"%";
+			this.progression = this.getProgression();
 			
 		},
 		getProgression:function(){
