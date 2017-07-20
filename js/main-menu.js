@@ -81,9 +81,10 @@ var app = new Vue({
 			var _this = this;
 			this.active = value;
 			this.currentView = action;
-			$.getJSON(action, function (json){
-				_this.datas = json;
-			});
+			
+			this.$http.get(action).then(function(response){
+				_this.datas = response.body;
+			})
 		},
 		updateChannels:function(){
 			this.refresh(this.active, this.currentView);

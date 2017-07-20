@@ -70,7 +70,8 @@ class Singlepageapp extends CI_Controller {
     }
 
     private function parseResponse($datas){
-        $this->output->set_content_type('application/json');
+        // $this->output->set_content_type('application/json');
+        header('Content-Type: application/json');
         echo json_encode($datas);
     }
 

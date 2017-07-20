@@ -11,7 +11,6 @@
 	</nav>
 
 	<div class="container" id="app">
-
 		<div class="subnav menu clearfix">
 			{include file="programmes/main-menu.tpl"}
 		</div>
@@ -20,69 +19,30 @@
 				<program-card v-for="(item, index) in datas" :prog='item' :key="index"></program-card>
 			</div>
 		</div>
-		{include file="programmes/channelselection.tpl"}
+
+		<div class="modal fade bs-example-modal-sm" id="channelSelection">
+		  <div class="modal-dialog modal-sm" >
+		    <div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Mes chaînes préférées</h4>
+				</div>
+			    {literal}<chanl-list @channel-list-updated="updateChannels"></chanl-list>{/literal}
+		    </div>
+		  </div>
+		</div>		
 	</div>
-	
 
-{literal}
-<template id="prog-card">
-	<div class="col-xs-12 col-sm-4 col-md-3 programme-block-container">
-		<div class="programme-block clearfix">
-			<img v-bind:src="prog.imgurl" onerror="this.src='img/error_img.png'"/>
-			<div class="program-details">
-				<p class="program-channel"><strong>{{prog.name}}</strong> - <span class="time-color">{{prog.start|hour}}</span> - <span>{{prog.end|hour}}</span></p>
-				<p class="program-title">{{prog.title}}<em v-if='prog.subtitle'> - {{prog.subtitle}}</em></p>
-				<div class="progression">
-					<div class="progress">
-						<div class="progress-bar" v-bind:style="progressionStyle"></div>
-					</div>
-					<p class="program-length"><em>{{prog.length}}mn</em></p>
-				</div>	        
-			</div>
-		</div>
-	</div>
-</template>
-{/literal}
-
-
-<template id="channel-list">
-	<form>
-		<div class="modal-body">
-			{nocache}
-				{foreach $channels as $item}
-					<div class="checkbox">
-						<label for="channel{$item->channelId}">
-						<input
-							class="channel"
-							type="checkbox"							
-							id="channel{$item->channelId}"
-							v-model="checkedNames"
-							v-on:click="addChannel"
-							value="{$item->channelId}"> {$item->name}
-						</label>
-					</div>						
-				{/foreach}
-			{/nocache}			
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-			<button type="button" class="btn btn-primary" @click="getChannels" data-dismiss="modal">Appliquer</button>
-		</div>
-	</form>
-</template>
-
-
-
-
+{include file="programmes/vuetemplate-programblock.tpl"}
+{include file="programmes/vuetemplate-channelselection.tpl"}
 {/block}
 
 {block "scripts"}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/fr.js"></script>
-{* <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script> *}
 <script src="{base_url('js/js.cookie.js')}"></script>
 {* <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.min.js"></script> *}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.4/vue-resource.min.js"></script>
 <script src="{base_url('js/main-menu.js')}"></script>
 {* <script src="{base_url('js/gdo.js')}"></script> *}
 {/block}
