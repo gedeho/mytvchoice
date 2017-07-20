@@ -2,9 +2,9 @@ Vue.component('chanl-list',{
 	template: '#channel-list',
 	data:function(){
 	    return{
-	    	checkedNames:Cookies.getJSON('channelselection') || []
+	    	checkedNames:Cookies.getJSON('channelselection') || ["2", "3", "13", "5", "6", "1"]
 	    }
-	},
+	},	
 	methods:{
 		addChannel:function(){
 			Cookies.set('channelselection', this.checkedNames, {expires:7});
@@ -12,6 +12,9 @@ Vue.component('chanl-list',{
 		getChannels:function(){
 			this.$emit('channel-list-updated');
 		}
+	},
+	mounted(){
+		this.addChannel();
 	}
 });
 
