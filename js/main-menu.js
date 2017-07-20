@@ -1,3 +1,4 @@
+// Channels List Component :
 Vue.component('chanl-list',{
 	template: '#channel-list',
 	data:function(){
@@ -46,19 +47,19 @@ Vue.component('program-card',{
 		hour:(value)=>moment(value).format('HH:mm')
 	},
 	mounted(){
-		setInterval(this.updateProgressBar, 1000)
+		setInterval(this.getProgression, 1000)
 	},
 	methods:{
-		updateProgressBar:function(){
-			this.progression = this.getProgression();			
-		},
+		// updateProgressBar:function(){
+		// 	this.progression = this.getProgression();			
+		// },
 		getProgression:function(){
 			var now = moment().format('x');
 			var timeBetweenStartAndToday = (now - this.startInMs);
 			var p = Math.round(timeBetweenStartAndToday / this.timeBetweenStartAndEnd * 100);
 			p = (p >= 100)?100:p;
 			p = (p < 0)?0:p;
-			return p;
+			this.progression = p;
 		}
 	}
 }); 
