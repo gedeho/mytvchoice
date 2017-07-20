@@ -1,26 +1,19 @@
-// Main APP :
-var app = new Vue({
-	el: '#app',
-	data:{
-		active : 'A',
-		datas:null
-	},
-	mounted(){
-		this.refresh('A', 'refresh');
+Vue.component('chanl-list',{
+	template: '#channel-list',
+	data:function(){
+	    return{
+	    	checkedNames:Cookies.getJSON('channelselection') || []
+	    }
 	},
 	methods:{
-		refresh:function(value, action){
-			var _this = this;
-			_this.active = value;
-			$.getJSON(action, function (json){
-				_this.datas = json;
-			});
+		addChannel:function(){
+			Cookies.set('channelselection', this.checkedNames, {expires:7});
 		},
-		isActive:function(value){
-			return this.active === value;
+		getChannels:function(){
+			this.$emit('channel-list-updated');
 		}
 	}
-})
+});
 
 // Program Card Component :
 Vue.component('program-card',{
@@ -28,7 +21,7 @@ Vue.component('program-card',{
 	template : '#prog-card',
 	data:function(){
 		return{
-			progression:'0'		
+			progression:'0'
 		}
 	},
 	computed:{
@@ -45,28 +38,58 @@ Vue.component('program-card',{
 		progressionStyle:function(){
 			return "width:"+this.progression+"%";
 		}
-
 	},
 	filters:{
-		hour:function(value){
-			return moment(value).format('HH:mm');
-		}
+		hour:(value)=>moment(value).format('HH:mm')
 	},
 	mounted(){
 		setInterval(this.updateProgressBar, 1000)
 	},
 	methods:{
 		updateProgressBar:function(){
-			this.progression = this.getProgression();
-			
+			this.progression = this.getProgression();			
 		},
 		getProgression:function(){
 			var now = moment().format('x');
 			var timeBetweenStartAndToday = (now - this.startInMs);
 			var p = Math.round(timeBetweenStartAndToday / this.timeBetweenStartAndEnd * 100);
-			var p = (p >= 100)?100:p;
-			var p = (p < 0)?0:p;
+			p = (p >= 100)?100:p;
+			p = (p < 0)?0:p;
 			return p;
 		}
 	}
 }); 
+
+
+
+// Main APP :
+var app = new Vue({
+	el: '#app',
+	data:{
+		active : 'A',
+		currentView:'refresh',
+		datas:null
+	},
+	mounted(){
+		this.refresh('A', 'refresh');
+	},
+	methods:{
+		refresh:function(value, action){
+			var _this = this;
+			this.active = value;
+			this.currentView = action;
+			$.getJSON(action, function (json){
+				_this.datas = json;
+			});
+		},
+		updateChannels:function(){
+			this.refresh(this.active, this.currentView);
+		},
+		isActive:function(value){
+			return this.active === value
+		}
+	}
+});
+
+
+

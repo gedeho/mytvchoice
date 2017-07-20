@@ -35,7 +35,7 @@ class Singlepageapp extends CI_Controller {
 
     public function refresh(){
         $selection = $this->input->get('channels');
-        $programs = $this->programs->getCurrent($selection);
+        $programs = $this->programs->getCurrent($this->channelselection);
         $this->parseResponse($programs);
     }
 

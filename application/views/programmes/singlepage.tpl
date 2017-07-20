@@ -20,13 +20,14 @@
 				<program-card v-for="(item, index) in datas" :prog='item' :key="index"></program-card>
 			</div>
 		</div>
+		{include file="programmes/channelselection.tpl"}
 	</div>
-	{include file="programmes/channelselection.tpl"}
+	
 
 {literal}
 <template id="prog-card">
 	<div class="col-xs-12 col-sm-4 col-md-3 programme-block-container">
-		<div class="programme-block  clearfix">
+		<div class="programme-block clearfix">
 			<img v-bind:src="prog.imgurl" onerror="this.src='img/error_img.png'"/>
 			<div class="program-details">
 				<p class="program-channel"><strong>{{prog.name}}</strong> - <span class="time-color">{{prog.start|hour}}</span> - <span>{{prog.end|hour}}</span></p>
@@ -42,6 +43,37 @@
 	</div>
 </template>
 {/literal}
+
+
+<template id="channel-list">
+	<form>
+		<div class="modal-body">
+			{nocache}
+				{foreach $channels as $item}
+					<div class="checkbox">
+						<label for="channel{$item->channelId}">
+						<input
+							class="channel"
+							type="checkbox"							
+							id="channel{$item->channelId}"
+							v-model="checkedNames"
+							v-on:click="addChannel"
+							value="{$item->channelId}"> {$item->name}
+						</label>
+					</div>						
+				{/foreach}
+			{/nocache}			
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			<button type="button" class="btn btn-primary" @click="getChannels" data-dismiss="modal">Appliquer</button>
+		</div>
+	</form>
+</template>
+
+
+
+
 {/block}
 
 {block "scripts"}
