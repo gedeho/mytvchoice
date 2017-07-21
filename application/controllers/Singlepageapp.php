@@ -1,18 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
- * CI Smarty
- *
- * Smarty templating for Codeigniter
- *
- * @package   CI Smarty
- * @author    Dwayne Charrington
- * @copyright 2015 Dwayne Charrington and Github contributors
- * @link      http://ilikekillnerds.com
- * @license   MIT
- * @version   3.0
- */
-
 class Singlepageapp extends CI_Controller {
 
 	public function __construct()
@@ -35,7 +22,7 @@ class Singlepageapp extends CI_Controller {
 
     public function refresh(){
         $selection = $this->input->get('channels');
-        $programs = $this->programs->getCurrent($selection);
+        $programs = $this->programs->getCurrent($this->channelselection);
         $this->parseResponse($programs);
     }
 
@@ -70,13 +57,14 @@ class Singlepageapp extends CI_Controller {
     }
 
     private function parseResponse($datas){
-        $this->output->set_content_type('application/json');
-        echo json_encode($datas);
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($datas));
     }
 
     public function updateFeed(){
         $this->load->library('feedupdater');
         $this->feedupdater->updateFeed();
-        redirect('programmestv/getCurrent');
+        redirect('single');
     }
 }
