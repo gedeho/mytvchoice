@@ -2,6 +2,8 @@ body{
     /*padding-top: 15px;*/
 }
 
+[v-cloak] { display:none; }
+
 .menu{
     margin-bottom: 15px;
 }
@@ -92,7 +94,7 @@ body{
 
 .program-details{
     padding: 10px;
-    height: 108px;
+    height: 125px;
     padding-bottom: 0;
     position: relative;
 }

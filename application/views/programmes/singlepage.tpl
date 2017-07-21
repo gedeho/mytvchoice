@@ -5,7 +5,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">			
-				{literal}<span class="navbar-brand">Programmes TV du {{currentDate}}</span>{/literal}
+				{literal}<span class="navbar-brand" v-cloak>Programmes TV du {{currentDate}}</span>{/literal}
 			</div>
 			<p class="navbar-text navbar-right channel-selection" data-toggle="modal" data-target="#channelSelection">Liste des chaînes</p>
 		</div>
