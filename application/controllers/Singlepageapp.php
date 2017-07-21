@@ -65,6 +65,6 @@ class Singlepageapp extends CI_Controller {
     public function updateFeed(){
         $this->load->library('feedupdater');
         $this->feedupdater->updateFeed();
-        redirect('programmestv/getCurrent');
+        redirect('single');
     }
 }
