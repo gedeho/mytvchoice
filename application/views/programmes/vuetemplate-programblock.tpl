@@ -2,7 +2,7 @@
 <template id="prog-card">
 	<transition name="fade">
 	<div v-if="show" class="col-xs-12 col-sm-4 col-md-3 programme-block-container">
-		<div class="programme-block clearfix" v-on:click="show = !show">
+		<div class="programme-block clearfix">
 			<img v-bind:src="prog.imgurl" onerror="this.src='img/error_img.png'"/>
 			<div class="program-details">
 				<p class="program-channel"><strong>{{prog.name}}</strong> - <span class="time-color">{{prog.start|hour}}</span> - <span>{{prog.end|hour}}</span></p>
