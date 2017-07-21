@@ -1,4 +1,4 @@
-// Channels List Component :
+// Channels-List Component :
 Vue.component('chanl-list',{
 	template: '#channel-list',
 	data:function(){
@@ -19,13 +19,19 @@ Vue.component('chanl-list',{
 	}
 });
 
-// Program Card Component :
+// Program-Card Component :
 Vue.component('program-card',{
 	props:['prog'],	
 	template : '#prog-card',
 	data:function(){
 		return{
-			progression:'0'
+			progression:'0',
+			show: true
+		}
+	},
+	watch:{
+		prog:function(){
+			this.show = true;
 		}
 	},
 	computed:{
@@ -54,14 +60,15 @@ Vue.component('program-card',{
 			var now = moment().format('x');
 			var timeBetweenStartAndToday = (now - this.startInMs);
 			var p = Math.round(timeBetweenStartAndToday / this.timeBetweenStartAndEnd * 100);
-			p = (p >= 100)?100:p;
+			if(p >= 100){
+				this.progression = p;
+				this.show = false;
+			}
 			p = (p < 0)?0:p;
 			this.progression = p;
 		}
 	}
-}); 
-
-
+});
 
 // Main APP :
 var app = new Vue({
@@ -87,7 +94,9 @@ var app = new Vue({
 			
 			this.$http.get(action).then(function(response){
 				_this.datas = response.body;
-			})
+			});
+
+
 		},
 		updateChannels:function(){
 			this.refresh(this.active, this.currentView);
