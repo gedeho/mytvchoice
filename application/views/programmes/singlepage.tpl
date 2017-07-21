@@ -1,16 +1,17 @@
 {extends file="master.tpl"}
 
 {block "view"}
+	<div id="app">
 	<nav class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">			
-				<span class="navbar-brand">Programmes TV du <span class="date-title"></span></span>
+				{literal}<span class="navbar-brand">Programmes TV du {{currentDate}}</span>{/literal}
 			</div>
 			<p class="navbar-text navbar-right channel-selection" data-toggle="modal" data-target="#channelSelection">Liste des chaînes</p>
 		</div>
 	</nav>
 
-	<div class="container" id="app">
+	<div class="container">
 		<div class="subnav menu clearfix">
 			{include file="programmes/main-menu.tpl"}
 		</div>
@@ -30,6 +31,7 @@
 		    </div>
 		  </div>
 		</div>		
+	</div>
 	</div>
 
 {include file="programmes/vuetemplate-programblock.tpl"}

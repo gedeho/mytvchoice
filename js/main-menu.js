@@ -50,9 +50,6 @@ Vue.component('program-card',{
 		setInterval(this.getProgression, 1000)
 	},
 	methods:{
-		// updateProgressBar:function(){
-		// 	this.progression = this.getProgression();			
-		// },
 		getProgression:function(){
 			var now = moment().format('x');
 			var timeBetweenStartAndToday = (now - this.startInMs);
@@ -73,6 +70,11 @@ var app = new Vue({
 		active : 'A',
 		currentView:'refresh',
 		datas:null
+	},
+	computed:{
+		currentDate:function(){
+			return moment().format('dddd DD MMMM YYYY');
+		}
 	},
 	mounted(){
 		this.refresh('A', 'refresh');
