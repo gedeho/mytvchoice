@@ -47,6 +47,7 @@ class Programs extends CI_Model {
         $FormatedStartB = date('Y-m-d H:i:s', strtotime($startB));
         $this->db->where('start >=', $FormatedStartA);
         $this->db->where('start <=', $FormatedStartB);
+        $this->db->where("end >= NOW()", NULL, FALSE);
         $this->db->where('length >', '30');
         $this->db->join('channels', 'channels.channelId = programs.channelId');
         $this->db->where_in('programs.channelId', $selection);
