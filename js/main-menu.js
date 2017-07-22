@@ -95,8 +95,6 @@ var app = new Vue({
 			this.$http.get(action).then(function(response){
 				_this.datas = response.body;
 			});
-
-
 		},
 		updateChannels:function(){
 			this.refresh(this.active, this.currentView);
