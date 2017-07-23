@@ -39,12 +39,5 @@
 {/block}
 
 {block "scripts"}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/fr.js"></script>
-<script src="{base_url('js/js.cookie.js')}"></script>
-{* <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.min.js"></script> *}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.4/vue-resource.min.js"></script>
-<script src="{base_url('js/main-menu.js')}"></script>
-{* <script src="{base_url('js/gdo.js')}"></script> *}
+	<script src="{base_url('build/app.min.js')}"></script>
 {/block}

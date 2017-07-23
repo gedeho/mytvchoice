@@ -1,3 +1,11 @@
+import 'bootstrap';
+import Cookies from 'js-cookie';
+import moment from 'moment';
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+import 'moment-locale-fr';
+Vue.use(VueResource);
+
 // Channels-List Component :
 Vue.component('chanl-list',{
 	template: '#channel-list',
