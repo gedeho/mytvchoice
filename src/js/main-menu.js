@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../css/styles.css';
 import 'bootstrap';
 import Cookies from 'js-cookie';
 import moment from 'moment';
