@@ -32,4 +32,5 @@ application/config/config\.php
 
 application/config/database\.php
 
-feeds/
+feeds/*
+node_modules/*
